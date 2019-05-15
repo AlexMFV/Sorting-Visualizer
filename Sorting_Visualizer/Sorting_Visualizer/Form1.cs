@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,12 +14,13 @@ namespace Sorting_Visualizer
     public partial class Form1 : Form
     {
         //Drawing Methods
-        Graphics gfx;
         Brush myBrush;
 
         //Variables
-        List<int> values = new List<int>();
-        int arraySize = 100;
+        public List<int> values = new List<int>();
+        int arraySize = 246;
+
+        public Common vars = new Common();
 
         //Rectangle Sizes
         int RECT_WIDTH = 1;
@@ -27,8 +29,16 @@ namespace Sorting_Visualizer
         public Form1()
         {
             InitializeComponent();
-            gfx = panel1.CreateGraphics();
+            this.DoubleBuffered = true;
             myBrush = new SolidBrush(Color.White);
+            cbbAlgos.SelectedIndex = 0;
+            vars.SORTING_TIME = 150;
+        }
+
+        public async Task wait()
+        {
+            await Task.Delay(vars.SORTING_TIME);
+            this.Refresh();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -42,7 +52,7 @@ namespace Sorting_Visualizer
             for(int i = 0; i < values.Count(); i++)
             {
                 Rectangle rect = new Rectangle(i * RECT_WIDTH + i, panel1.Height-values[i], RECT_WIDTH, values[i]);
-                gfx.FillRectangle(myBrush, rect);
+                e.Graphics.FillRectangle(myBrush, rect);
             }
         }
 
@@ -53,7 +63,7 @@ namespace Sorting_Visualizer
             if(values.Count() > 0)
                 values.Clear();
 
-            for (int i = 6; i < arraySize * 6; i += 6)
+            for (int i = 1; i < arraySize * 2; i += 1)
                 values.Add(i);
         }
 
@@ -94,6 +104,21 @@ namespace Sorting_Visualizer
         {
             FastSortArray();
             this.Refresh();
+        }
+
+        private void tbTime_ValueChanged(object sender, EventArgs e)
+        {
+            lblTime.Text = "Time: " + tbTime.Value + "ms";
+            vars.SORTING_TIME = tbTime.Value;
+        }
+
+        private void btnSort_Click(object sender, EventArgs e)
+        {
+            switch (cbbAlgos.SelectedIndex)
+            {
+                case 0: Algorithms.SelectionSort(this); break;
+                default: break;
+            }
         }
     }
 }
