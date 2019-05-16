@@ -83,5 +83,40 @@ namespace Sorting_Visualizer
             }
             FinalizeSort(form);
         }
+
+        public async static void BogoSort(Form1 form)
+        {
+            while (!form.isSorted) {
+                Random rand = new Random();
+                int valueStore = 0;
+                int idx = 0;
+
+                //Randomize the Array
+                for (int i = 0; i < form.values.Count(); i++)
+                {
+                    idx = rand.Next(0, form.values.Count());
+                    valueStore = form.values[idx];
+                    form.values[idx] = form.values[i];
+                    form.values[i] = valueStore;
+
+                    form.barColors[idx] = 255;
+                }
+
+                //Check if is sorted
+                if(CheckIfSorted(form))
+                    form.isSorted = true;
+
+                await form.wait();
+            }
+            FinalizeSort(form);
+        }
+
+        //Check if is sorted
+        static bool CheckIfSorted(Form1 form)
+        {
+            for (int i = 1; i < form.values.Count(); ++i)
+                if (form.values[i] < form.values[i - 1]) return false;
+            return true;
+        }
     }
 }
