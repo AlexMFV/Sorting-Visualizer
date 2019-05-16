@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.btnResetMS = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cbbAlgos = new System.Windows.Forms.ComboBox();
             this.btnSort = new System.Windows.Forms.Button();
@@ -37,14 +38,22 @@
             this.btnFastSort = new System.Windows.Forms.Button();
             this.btnRandomize = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblArray = new System.Windows.Forms.Label();
+            this.nupArraySize = new System.Windows.Forms.NumericUpDown();
+            this.btnUpdateSize = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbTime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nupArraySize)).BeginInit();
             this.SuspendLayout();
             // 
             // mainPanel
             // 
             this.mainPanel.BackColor = System.Drawing.Color.LightGray;
             this.mainPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mainPanel.Controls.Add(this.btnUpdateSize);
+            this.mainPanel.Controls.Add(this.nupArraySize);
+            this.mainPanel.Controls.Add(this.lblArray);
+            this.mainPanel.Controls.Add(this.btnResetMS);
             this.mainPanel.Controls.Add(this.label1);
             this.mainPanel.Controls.Add(this.cbbAlgos);
             this.mainPanel.Controls.Add(this.btnSort);
@@ -57,6 +66,16 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(280, 681);
             this.mainPanel.TabIndex = 0;
+            // 
+            // btnResetMS
+            // 
+            this.btnResetMS.Location = new System.Drawing.Point(85, 436);
+            this.btnResetMS.Name = "btnResetMS";
+            this.btnResetMS.Size = new System.Drawing.Size(75, 23);
+            this.btnResetMS.TabIndex = 7;
+            this.btnResetMS.Text = "Reset Time";
+            this.btnResetMS.UseVisualStyleBackColor = true;
+            this.btnResetMS.Click += new System.EventHandler(this.btnResetMS_Click);
             // 
             // label1
             // 
@@ -74,7 +93,8 @@
             this.cbbAlgos.FormattingEnabled = true;
             this.cbbAlgos.Items.AddRange(new object[] {
             "Selection Sort",
-            "Insertion Sort"});
+            "Insertion Sort",
+            "Bogo Sort"});
             this.cbbAlgos.Location = new System.Drawing.Point(11, 24);
             this.cbbAlgos.MaxDropDownItems = 15;
             this.cbbAlgos.Name = "cbbAlgos";
@@ -144,6 +164,48 @@
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // lblArray
+            // 
+            this.lblArray.AutoSize = true;
+            this.lblArray.Location = new System.Drawing.Point(11, 61);
+            this.lblArray.Name = "lblArray";
+            this.lblArray.Size = new System.Drawing.Size(57, 13);
+            this.lblArray.TabIndex = 8;
+            this.lblArray.Text = "Array Size:";
+            // 
+            // nupArraySize
+            // 
+            this.nupArraySize.Location = new System.Drawing.Point(13, 78);
+            this.nupArraySize.Maximum = new decimal(new int[] {
+            245,
+            0,
+            0,
+            0});
+            this.nupArraySize.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nupArraySize.Name = "nupArraySize";
+            this.nupArraySize.Size = new System.Drawing.Size(87, 20);
+            this.nupArraySize.TabIndex = 9;
+            this.nupArraySize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nupArraySize.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // btnUpdateSize
+            // 
+            this.btnUpdateSize.Location = new System.Drawing.Point(107, 75);
+            this.btnUpdateSize.Name = "btnUpdateSize";
+            this.btnUpdateSize.Size = new System.Drawing.Size(158, 23);
+            this.btnUpdateSize.TabIndex = 10;
+            this.btnUpdateSize.Text = "Update Size";
+            this.btnUpdateSize.UseVisualStyleBackColor = true;
+            this.btnUpdateSize.Click += new System.EventHandler(this.btnUpdateSize_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -160,6 +222,7 @@
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nupArraySize)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -175,6 +238,10 @@
         private System.Windows.Forms.Button btnSort;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbbAlgos;
+        private System.Windows.Forms.Button btnResetMS;
+        private System.Windows.Forms.Label lblArray;
+        private System.Windows.Forms.NumericUpDown nupArraySize;
+        private System.Windows.Forms.Button btnUpdateSize;
     }
 }
 

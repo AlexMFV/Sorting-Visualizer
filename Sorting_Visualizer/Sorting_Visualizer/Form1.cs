@@ -20,13 +20,14 @@ namespace Sorting_Visualizer
         //Variables
         public List<int> values = new List<int>();
         public List<int> barColors = new List<int>();
-        int arraySize = 90;  // 246 and array 1,2,1 for max (Default: 90, 6, 6, 6)
+        int arraySize = 246;  // 246 and array 1,2,1 for max (Default: 90, 6, 6, 6)
         public bool isSorted = true;
 
         public Common vars = new Common();
 
         //Rectangle Sizes
         int RECT_WIDTH = 1;
+        int RECT_HEIGHT = 0;
         //int RECT_SPACING = 1;
 
         public Form1()
@@ -36,6 +37,7 @@ namespace Sorting_Visualizer
             whiteBrush = new SolidBrush(Color.White);
             cbbAlgos.SelectedIndex = 0;
             vars.SORTING_TIME = 40;
+            RECT_HEIGHT = (this.Height - 10) / arraySize;
         }
 
         public async Task wait()
@@ -82,7 +84,7 @@ namespace Sorting_Visualizer
                 barColors.Clear();
             }
 
-            for (int i = 6; i < arraySize * 6; i += 6)
+            for (int i = RECT_HEIGHT; i < arraySize * RECT_HEIGHT; i += RECT_HEIGHT)
             {
                 values.Add(i);
                 barColors.Add(0);
@@ -117,7 +119,7 @@ namespace Sorting_Visualizer
 
         public void GetRectangleSize()
         {
-            RECT_WIDTH = (int)(panel1.Width - values.Count()) / values.Count();
+            RECT_WIDTH = (panel1.Width - arraySize) / arraySize;
         }
 
         private void btnRandomize_Click(object sender, EventArgs e)
@@ -144,8 +146,24 @@ namespace Sorting_Visualizer
             {
                 case 0: Algorithms.SelectionSort(this); break;
                 case 1: Algorithms.InsertionSort(this); break;
+                case 2: Algorithms.BogoSort(this); break;
                 default: break;
             }
+        }
+
+        private void btnResetMS_Click(object sender, EventArgs e)
+        {
+            this.lblTime.Text = "Time: 40ms";
+            this.tbTime.Value = 40;
+        }
+
+        private async void btnUpdateSize_Click(object sender, EventArgs e)
+        {
+            arraySize = (int)nupArraySize.Value + 1;
+            GetRectangleSize();
+            RECT_HEIGHT = (this.Height - 50) / arraySize;
+            FillArray();
+            await wait();
         }
     }
 }
