@@ -14,11 +14,14 @@ namespace Sorting_Visualizer
     public partial class Form1 : Form
     {
         //Drawing Methods
-        Brush myBrush;
+        Brush whiteBrush;
+        Brush colorBrush;
 
         //Variables
         public List<int> values = new List<int>();
-        int arraySize = 246;
+        public List<int> barColors = new List<int>();
+        int arraySize = 90;  // 246 and array 1,2,1 for max (Default: 90, 6, 6, 6)
+        public bool isSorted = true;
 
         public Common vars = new Common();
 
@@ -30,9 +33,9 @@ namespace Sorting_Visualizer
         {
             InitializeComponent();
             this.DoubleBuffered = true;
-            myBrush = new SolidBrush(Color.White);
+            whiteBrush = new SolidBrush(Color.White);
             cbbAlgos.SelectedIndex = 0;
-            vars.SORTING_TIME = 150;
+            vars.SORTING_TIME = 40;
         }
 
         public async Task wait()
@@ -49,10 +52,23 @@ namespace Sorting_Visualizer
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
+            Brush toUse;
+
             for(int i = 0; i < values.Count(); i++)
             {
-                Rectangle rect = new Rectangle(i * RECT_WIDTH + i, panel1.Height-values[i], RECT_WIDTH, values[i]);
-                e.Graphics.FillRectangle(myBrush, rect);
+                if (barColors[i] > 0)
+                {
+                    colorBrush = new SolidBrush(Color.FromArgb(255, 255 - barColors[i], 255 - barColors[i]));
+                    toUse = colorBrush;
+                }
+                else
+                    toUse = whiteBrush;
+
+                if (barColors[i] > 0)
+                    barColors[i] -= 85;
+
+                Rectangle rect = new Rectangle(i * RECT_WIDTH + i, panel1.Height - values[i], RECT_WIDTH, values[i]);
+                e.Graphics.FillRectangle(toUse, rect);
             }
         }
 
@@ -60,22 +76,32 @@ namespace Sorting_Visualizer
         public void FillArray()
         {
             //Clears the array if its not empty already
-            if(values.Count() > 0)
+            if (values.Count() > 0)
+            {
                 values.Clear();
+                barColors.Clear();
+            }
 
-            for (int i = 1; i < arraySize * 2; i += 1)
+            for (int i = 6; i < arraySize * 6; i += 6)
+            {
                 values.Add(i);
+                barColors.Add(0);
+            }
         }
 
         //Randomizes the Array
         public void RandomizeArray()
         {
+            isSorted = false;
             Random rand = new Random();
             int valueStore = 0;
             int idx = 0;
 
+            barColors.Clear();
+
             for (int i = 0; i < values.Count(); i++)
             {
+                barColors.Add(0);
                 idx = rand.Next(0, values.Count());
                 valueStore = values[idx];
                 values[idx] = values[i];
@@ -117,6 +143,7 @@ namespace Sorting_Visualizer
             switch (cbbAlgos.SelectedIndex)
             {
                 case 0: Algorithms.SelectionSort(this); break;
+                case 1: Algorithms.InsertionSort(this); break;
                 default: break;
             }
         }
