@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.lblSortTime = new System.Windows.Forms.Label();
             this.btnUpdateSize = new System.Windows.Forms.Button();
             this.nupArraySize = new System.Windows.Forms.NumericUpDown();
             this.lblArray = new System.Windows.Forms.Label();
@@ -51,6 +52,7 @@
             // 
             this.mainPanel.BackColor = System.Drawing.Color.LightGray;
             this.mainPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mainPanel.Controls.Add(this.lblSortTime);
             this.mainPanel.Controls.Add(this.btnUpdateSize);
             this.mainPanel.Controls.Add(this.nupArraySize);
             this.mainPanel.Controls.Add(this.lblArray);
@@ -67,6 +69,15 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(280, 681);
             this.mainPanel.TabIndex = 0;
+            // 
+            // lblSortTime
+            // 
+            this.lblSortTime.AutoSize = true;
+            this.lblSortTime.Location = new System.Drawing.Point(11, 122);
+            this.lblSortTime.Name = "lblSortTime";
+            this.lblSortTime.Size = new System.Drawing.Size(255, 13);
+            this.lblSortTime.TabIndex = 11;
+            this.lblSortTime.Text = "Sorting Time: 00:00:00.000 (depends highly on CPU)";
             // 
             // btnUpdateSize
             // 
@@ -246,6 +257,7 @@
         private System.Windows.Forms.NumericUpDown nupArraySize;
         private System.Windows.Forms.Button btnUpdateSize;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lblSortTime;
     }
 }
 

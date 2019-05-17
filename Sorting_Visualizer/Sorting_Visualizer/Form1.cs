@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Sorting_Visualizer
 {
@@ -18,6 +19,12 @@ namespace Sorting_Visualizer
         public List<int> barColors = new List<int>();
         int arraySize = 90;  // 246 and array 1,2,1 for max (Default: 90, 6, 6, 6)
         public bool isSorted = true;
+
+        //Values
+        public System.Threading.Timer sort_timer = null;
+        DateTime time_start;
+        TimeSpan timeSpan_elapsed;
+        string time;
 
         public Common vars = new Common();
 
@@ -35,6 +42,29 @@ namespace Sorting_Visualizer
             cbbAlgos.SelectedIndex = 0;
             vars.SORTING_TIME = 40;
             RECT_HEIGHT = (int)Math.Floor((this.Height - 10.0) / arraySize);
+        }
+
+        public void StopTimer()
+        {
+            sort_timer.Change(Timeout.Infinite, Timeout.Infinite);
+        }
+
+        public void StartTimer()
+        {
+            time_start = DateTime.Now;
+            sort_timer = new System.Threading.Timer(Tick, null, 1, 10);
+        }
+
+        public void Tick(object args)
+        {
+            timeSpan_elapsed = DateTime.Now.Subtract(time_start);
+            time = string.Format("{0:D2}:{1:D2}:{2:D2}.{3:D3}", timeSpan_elapsed.Hours, timeSpan_elapsed.Minutes, timeSpan_elapsed.Seconds, timeSpan_elapsed.Milliseconds) + " (depends highly on CPU)";
+            this.Invoke((Action)this.CountTime);
+        }
+
+        public void CountTime()
+        {            
+            lblSortTime.Text = "Sorting Time: " + time;
         }
 
         public async Task wait()

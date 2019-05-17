@@ -39,6 +39,7 @@ namespace Sorting_Visualizer
         {
             if (!form.isSorted)
             {
+                form.StartTimer();
                 int aux = 0;
                 for (int i = 0; i < form.values.Count(); i++)
                 {
@@ -60,6 +61,7 @@ namespace Sorting_Visualizer
                     await form.wait();
                 }
                 form.isSorted = true;
+                form.StopTimer();
             }
             FinalizeSort(form);
         }
@@ -69,6 +71,7 @@ namespace Sorting_Visualizer
         {
             if (!form.isSorted)
             {
+                form.StartTimer();
                 for (int i = 1; i < form.values.Count(); ++i)
                 {
                     int aux = form.values[i];
@@ -86,12 +89,14 @@ namespace Sorting_Visualizer
                     await form.wait();
                 }
                 form.isSorted = true;
+                form.StopTimer();
             }
             FinalizeSort(form);
         }
 
         public async static void BogoSort(Form1 form)
         {
+            form.StartTimer();
             while (!form.isSorted) {
                 Random rand = new Random();
                 int valueStore = 0;
@@ -109,8 +114,11 @@ namespace Sorting_Visualizer
                 }
 
                 //Check if is sorted
-                if(CheckIfSorted(form))
+                if (CheckIfSorted(form))
+                {
                     form.isSorted = true;
+                    form.StopTimer();
+                }
 
                 await form.wait();
             }
@@ -121,6 +129,7 @@ namespace Sorting_Visualizer
         {
             if (!form.isSorted)
             {
+                form.StartTimer();
                 int aux = -1;
                 for(int i = 0; i < form.values.Count(); i++)
                 {
@@ -140,6 +149,7 @@ namespace Sorting_Visualizer
                     }
                 }
                 form.isSorted = true;
+                form.StopTimer();
             }
             FinalizeSort(form);
         }
