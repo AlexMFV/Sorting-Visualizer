@@ -11,6 +11,10 @@ namespace Sorting_Visualizer
     {
         public async static void FinalizeSort(Form1 form)
         {
+            int aux = form.vars.SORTING_TIME;
+
+            form.vars.SORTING_TIME = 10;
+
             for (int i = 0; i < form.values.Count(); i++)
             {
                 form.barColors[i] = 255;
@@ -24,6 +28,8 @@ namespace Sorting_Visualizer
                     form.barColors[i] -= 85;
                 await form.wait();
             }
+
+            form.vars.SORTING_TIME = aux;
         }
 
         //------------------------------------------ALGORITHMS------------------------------------------
