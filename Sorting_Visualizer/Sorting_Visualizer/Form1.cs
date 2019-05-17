@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,7 +16,7 @@ namespace Sorting_Visualizer
         //Variables
         public List<int> values = new List<int>();
         public List<int> barColors = new List<int>();
-        int arraySize = 246;  // 246 and array 1,2,1 for max (Default: 90, 6, 6, 6)
+        int arraySize = 90;  // 246 and array 1,2,1 for max (Default: 90, 6, 6, 6)
         public bool isSorted = true;
 
         public Common vars = new Common();
@@ -147,6 +143,7 @@ namespace Sorting_Visualizer
                 case 0: Algorithms.SelectionSort(this); break;
                 case 1: Algorithms.InsertionSort(this); break;
                 case 2: Algorithms.BogoSort(this); break;
+                case 3: Algorithms.BubbleSort(this); break;
                 default: break;
             }
         }

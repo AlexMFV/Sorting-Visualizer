@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.btnUpdateSize = new System.Windows.Forms.Button();
+            this.nupArraySize = new System.Windows.Forms.NumericUpDown();
+            this.lblArray = new System.Windows.Forms.Label();
             this.btnResetMS = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cbbAlgos = new System.Windows.Forms.ComboBox();
@@ -38,12 +41,9 @@
             this.btnFastSort = new System.Windows.Forms.Button();
             this.btnRandomize = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lblArray = new System.Windows.Forms.Label();
-            this.nupArraySize = new System.Windows.Forms.NumericUpDown();
-            this.btnUpdateSize = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nupArraySize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTime)).BeginInit();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -66,6 +66,48 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(280, 681);
             this.mainPanel.TabIndex = 0;
+            // 
+            // btnUpdateSize
+            // 
+            this.btnUpdateSize.Location = new System.Drawing.Point(107, 75);
+            this.btnUpdateSize.Name = "btnUpdateSize";
+            this.btnUpdateSize.Size = new System.Drawing.Size(158, 23);
+            this.btnUpdateSize.TabIndex = 10;
+            this.btnUpdateSize.Text = "Update Size";
+            this.btnUpdateSize.UseVisualStyleBackColor = true;
+            this.btnUpdateSize.Click += new System.EventHandler(this.btnUpdateSize_Click);
+            // 
+            // nupArraySize
+            // 
+            this.nupArraySize.Location = new System.Drawing.Point(13, 78);
+            this.nupArraySize.Maximum = new decimal(new int[] {
+            245,
+            0,
+            0,
+            0});
+            this.nupArraySize.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nupArraySize.Name = "nupArraySize";
+            this.nupArraySize.Size = new System.Drawing.Size(87, 20);
+            this.nupArraySize.TabIndex = 9;
+            this.nupArraySize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nupArraySize.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // lblArray
+            // 
+            this.lblArray.AutoSize = true;
+            this.lblArray.Location = new System.Drawing.Point(11, 61);
+            this.lblArray.Name = "lblArray";
+            this.lblArray.Size = new System.Drawing.Size(57, 13);
+            this.lblArray.TabIndex = 8;
+            this.lblArray.Text = "Array Size:";
             // 
             // btnResetMS
             // 
@@ -94,7 +136,8 @@
             this.cbbAlgos.Items.AddRange(new object[] {
             "Selection Sort",
             "Insertion Sort",
-            "Bogo Sort"});
+            "Bogo Sort",
+            "Bubble Sort"});
             this.cbbAlgos.Location = new System.Drawing.Point(11, 24);
             this.cbbAlgos.MaxDropDownItems = 15;
             this.cbbAlgos.Name = "cbbAlgos";
@@ -164,48 +207,6 @@
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // lblArray
-            // 
-            this.lblArray.AutoSize = true;
-            this.lblArray.Location = new System.Drawing.Point(11, 61);
-            this.lblArray.Name = "lblArray";
-            this.lblArray.Size = new System.Drawing.Size(57, 13);
-            this.lblArray.TabIndex = 8;
-            this.lblArray.Text = "Array Size:";
-            // 
-            // nupArraySize
-            // 
-            this.nupArraySize.Location = new System.Drawing.Point(13, 78);
-            this.nupArraySize.Maximum = new decimal(new int[] {
-            245,
-            0,
-            0,
-            0});
-            this.nupArraySize.Minimum = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.nupArraySize.Name = "nupArraySize";
-            this.nupArraySize.Size = new System.Drawing.Size(87, 20);
-            this.nupArraySize.TabIndex = 9;
-            this.nupArraySize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nupArraySize.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            // 
-            // btnUpdateSize
-            // 
-            this.btnUpdateSize.Location = new System.Drawing.Point(107, 75);
-            this.btnUpdateSize.Name = "btnUpdateSize";
-            this.btnUpdateSize.Size = new System.Drawing.Size(158, 23);
-            this.btnUpdateSize.TabIndex = 10;
-            this.btnUpdateSize.Text = "Update Size";
-            this.btnUpdateSize.UseVisualStyleBackColor = true;
-            this.btnUpdateSize.Click += new System.EventHandler(this.btnUpdateSize_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -221,8 +222,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nupArraySize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTime)).EndInit();
             this.ResumeLayout(false);
 
         }

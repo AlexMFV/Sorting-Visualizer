@@ -111,6 +111,33 @@ namespace Sorting_Visualizer
             FinalizeSort(form);
         }
 
+        public async static void BubbleSort(Form1 form)
+        {
+            if (!form.isSorted)
+            {
+                int aux = -1;
+                for(int i = 0; i < form.values.Count(); i++)
+                {
+                    for(int j = 1; j < form.values.Count()-i; ++j)
+                    {
+                        if(form.values[j-1] > form.values[j])
+                        {
+                            int num = form.values[j];
+                            form.values[j] = form.values[j - 1];
+                            form.values[j-1] = num;
+
+                            form.barColors[j] = 255;
+                            form.barColors[j-1] = 255;
+                            aux++;
+                        }
+                        await form.wait();
+                    }
+                }
+                form.isSorted = true;
+            }
+            FinalizeSort(form);
+        }
+
         //Check if is sorted
         static bool CheckIfSorted(Form1 form)
         {
