@@ -24,6 +24,7 @@ namespace Sorting_Visualizer
         //Rectangle Sizes
         int RECT_WIDTH = 1;
         int RECT_HEIGHT = 0;
+        int toDivide = 1;
         //int RECT_SPACING = 1;
 
         public Form1()
@@ -33,7 +34,7 @@ namespace Sorting_Visualizer
             whiteBrush = new SolidBrush(Color.White);
             cbbAlgos.SelectedIndex = 0;
             vars.SORTING_TIME = 40;
-            RECT_HEIGHT = (this.Height - 10) / arraySize;
+            RECT_HEIGHT = (int)Math.Floor((this.Height - 10.0) / arraySize);
         }
 
         public async Task wait()
@@ -46,29 +47,7 @@ namespace Sorting_Visualizer
         {
             FillArray();
             GetRectangleSize();
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            Brush toUse;
-
-            for(int i = 0; i < values.Count(); i++)
-            {
-                if (barColors[i] > 0)
-                {
-                    colorBrush = new SolidBrush(Color.FromArgb(255, 255 - barColors[i], 255 - barColors[i]));
-                    toUse = colorBrush;
-                }
-                else
-                    toUse = whiteBrush;
-
-                if (barColors[i] > 0)
-                    barColors[i] -= 85;
-
-                Rectangle rect = new Rectangle(i * RECT_WIDTH + i, panel1.Height - values[i], RECT_WIDTH, values[i]);
-                e.Graphics.FillRectangle(toUse, rect);
-            }
-        }
+        }        
 
         //Fills the array with the initial values
         public void FillArray()
@@ -115,7 +94,10 @@ namespace Sorting_Visualizer
 
         public void GetRectangleSize()
         {
-            RECT_WIDTH = (panel1.Width - arraySize) / arraySize;
+            if (arraySize <= 327)
+                RECT_WIDTH = (pictureBox1.Width - 10 - arraySize) / arraySize;
+            else
+                RECT_WIDTH = (pictureBox1.Width - 10) / arraySize;
         }
 
         private void btnRandomize_Click(object sender, EventArgs e)
@@ -144,6 +126,18 @@ namespace Sorting_Visualizer
                 case 1: Algorithms.InsertionSort(this); break;
                 case 2: Algorithms.BogoSort(this); break;
                 case 3: Algorithms.BubbleSort(this); break;
+                case 4:  break;
+                case 5:  break;
+                case 6:  break;
+                case 7:  break;
+                case 8:  break;
+                case 9:  break;
+                case 10:  break;
+                case 11:  break;
+                case 12:  break;
+                case 13:  break;
+                case 14:  break;
+                case 15:  break;
                 default: break;
             }
         }
@@ -161,6 +155,34 @@ namespace Sorting_Visualizer
             RECT_HEIGHT = (this.Height - 50) / arraySize;
             FillArray();
             await wait();
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            Brush toUse;
+
+            for (int i = 0; i < values.Count(); i++)
+            {
+                if (barColors[i] > 0)
+                {
+                    colorBrush = new SolidBrush(Color.FromArgb(255, 255 - barColors[i], 255 - barColors[i]));
+                    toUse = colorBrush;
+                }
+                else
+                    toUse = whiteBrush;
+
+                if (barColors[i] > 0)
+                    barColors[i] -= 85;
+
+                Rectangle rect;
+
+                if (arraySize <= 327)
+                    rect = new Rectangle(10 + (i * RECT_WIDTH) + i, (pictureBox1.Height - 10) - values[i], RECT_WIDTH, values[i]);
+                else
+                    rect = new Rectangle(10 + (i * RECT_WIDTH), (pictureBox1.Height - 10) - values[i], RECT_WIDTH, values[i]);
+
+                e.Graphics.FillRectangle(toUse, rect);
+            }
         }
     }
 }

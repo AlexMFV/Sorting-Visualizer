@@ -40,10 +40,11 @@
             this.tbTime = new System.Windows.Forms.TrackBar();
             this.btnFastSort = new System.Windows.Forms.Button();
             this.btnRandomize = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nupArraySize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -81,7 +82,7 @@
             // 
             this.nupArraySize.Location = new System.Drawing.Point(13, 78);
             this.nupArraySize.Maximum = new decimal(new int[] {
-            245,
+            1024,
             0,
             0,
             0});
@@ -197,15 +198,16 @@
             this.btnRandomize.UseVisualStyleBackColor = true;
             this.btnRandomize.Click += new System.EventHandler(this.btnRandomize_Click);
             // 
-            // panel1
+            // pictureBox1
             // 
-            this.panel1.BackColor = System.Drawing.Color.Black;
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(984, 681);
-            this.panel1.TabIndex = 1;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.pictureBox1.BackColor = System.Drawing.Color.Black;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(984, 681);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
             // Form1
             // 
@@ -213,7 +215,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1264, 681);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.mainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -224,6 +226,7 @@
             this.mainPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nupArraySize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -233,7 +236,6 @@
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.Button btnFastSort;
         private System.Windows.Forms.Button btnRandomize;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.TrackBar tbTime;
         private System.Windows.Forms.Button btnSort;
@@ -243,6 +245,7 @@
         private System.Windows.Forms.Label lblArray;
         private System.Windows.Forms.NumericUpDown nupArraySize;
         private System.Windows.Forms.Button btnUpdateSize;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
