@@ -44,10 +44,14 @@ namespace Sorting_Visualizer
                 for (int i = 0; i < form.values.Count(); i++)
                 {
                     aux = i;
+                    //form.array_accesses++;
 
                     for (int j = i + 1; j < form.values.Count(); j++)
                     {
+                        //form.array_accesses+=2;
                         form.barColors[i] = 255;
+
+                        form.array_comparisons++;
                         if (form.values[j] < form.values[aux])
                             aux = j;
                     }
@@ -57,7 +61,9 @@ namespace Sorting_Visualizer
                     int min_num = form.values[aux];
                     form.values[aux] = form.values[i];
                     form.values[i] = min_num;
-                    
+
+                    //form.array_accesses+=3;
+
                     await form.wait();
                 }
                 form.isSorted = true;
@@ -79,6 +85,7 @@ namespace Sorting_Visualizer
 
                     while (j >= 0 && form.values[j] > aux)
                     {
+                        form.array_comparisons++;
                         form.barColors[i] = 255;
                         form.values[j + 1] = form.values[j];
                         j = j - 1;
@@ -113,6 +120,7 @@ namespace Sorting_Visualizer
                     form.barColors[idx] = 255;
                 }
 
+                form.array_comparisons++;
                 //Check if is sorted
                 if (CheckIfSorted(form))
                 {
@@ -135,6 +143,7 @@ namespace Sorting_Visualizer
                 {
                     for(int j = 1; j < form.values.Count()-i; ++j)
                     {
+                        form.array_comparisons++;
                         if(form.values[j-1] > form.values[j])
                         {
                             int num = form.values[j];
@@ -145,8 +154,8 @@ namespace Sorting_Visualizer
                             form.barColors[j-1] = 255;
                             aux++;
                         }
-                        await form.wait();
                     }
+                    await form.wait();
                 }
                 form.isSorted = true;
                 form.StopTimer();
