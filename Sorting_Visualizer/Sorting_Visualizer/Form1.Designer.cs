@@ -42,6 +42,8 @@
             this.btnFastSort = new System.Windows.Forms.Button();
             this.btnRandomize = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblComparisons = new System.Windows.Forms.Label();
+            this.lblAccesses = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nupArraySize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTime)).BeginInit();
@@ -52,6 +54,8 @@
             // 
             this.mainPanel.BackColor = System.Drawing.Color.LightGray;
             this.mainPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mainPanel.Controls.Add(this.lblAccesses);
+            this.mainPanel.Controls.Add(this.lblComparisons);
             this.mainPanel.Controls.Add(this.lblSortTime);
             this.mainPanel.Controls.Add(this.btnUpdateSize);
             this.mainPanel.Controls.Add(this.nupArraySize);
@@ -180,7 +184,7 @@
             this.tbTime.LargeChange = 100;
             this.tbTime.Location = new System.Drawing.Point(13, 459);
             this.tbTime.Maximum = 1000;
-            this.tbTime.Minimum = 10;
+            this.tbTime.Minimum = 1;
             this.tbTime.Name = "tbTime";
             this.tbTime.Size = new System.Drawing.Size(254, 45);
             this.tbTime.SmallChange = 10;
@@ -220,6 +224,24 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
+            // lblComparisons
+            // 
+            this.lblComparisons.AutoSize = true;
+            this.lblComparisons.Location = new System.Drawing.Point(12, 147);
+            this.lblComparisons.Name = "lblComparisons";
+            this.lblComparisons.Size = new System.Drawing.Size(79, 13);
+            this.lblComparisons.TabIndex = 12;
+            this.lblComparisons.Text = "Comparisons: 0";
+            // 
+            // lblAccesses
+            // 
+            this.lblAccesses.AutoSize = true;
+            this.lblAccesses.Location = new System.Drawing.Point(12, 172);
+            this.lblAccesses.Name = "lblAccesses";
+            this.lblAccesses.Size = new System.Drawing.Size(92, 13);
+            this.lblAccesses.TabIndex = 13;
+            this.lblAccesses.Text = "Array Accesses: 0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -258,6 +280,8 @@
         private System.Windows.Forms.Button btnUpdateSize;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblSortTime;
+        private System.Windows.Forms.Label lblAccesses;
+        private System.Windows.Forms.Label lblComparisons;
     }
 }
 

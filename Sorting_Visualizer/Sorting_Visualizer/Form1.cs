@@ -17,8 +17,10 @@ namespace Sorting_Visualizer
         //Variables
         public List<int> values = new List<int>();
         public List<int> barColors = new List<int>();
-        int arraySize = 90;  // 246 and array 1,2,1 for max (Default: 90, 6, 6, 6)
+        int arraySize = 101;  // 246 and array 1,2,1 for max (Default: 90, 6, 6, 6)
         public bool isSorted = true;
+        public int array_accesses = 0;
+        public int array_comparisons = 0;
 
         //Values
         public System.Threading.Timer sort_timer = null;
@@ -41,7 +43,7 @@ namespace Sorting_Visualizer
             whiteBrush = new SolidBrush(Color.White);
             cbbAlgos.SelectedIndex = 0;
             vars.SORTING_TIME = 40;
-            RECT_HEIGHT = (int)Math.Floor((this.Height - 10.0) / arraySize);
+            GetRectangleSize();
         }
 
         public void StopTimer()
@@ -52,19 +54,21 @@ namespace Sorting_Visualizer
         public void StartTimer()
         {
             time_start = DateTime.Now;
-            sort_timer = new System.Threading.Timer(Tick, null, 1, 10);
+            sort_timer = new System.Threading.Timer(Tick, null, 1, 50);
         }
 
         public void Tick(object args)
         {
-            timeSpan_elapsed = DateTime.Now.Subtract(time_start);
-            time = string.Format("{0:D2}:{1:D2}:{2:D2}.{3:D3}", timeSpan_elapsed.Hours, timeSpan_elapsed.Minutes, timeSpan_elapsed.Seconds, timeSpan_elapsed.Milliseconds) + " (depends highly on CPU)";
-            this.Invoke((Action)this.CountTime);
+            //timeSpan_elapsed = DateTime.Now.Subtract(time_start);
+            //time = string.Format("{0:D2}:{1:D2}:{2:D2}.{3:D3}", timeSpan_elapsed.Hours, timeSpan_elapsed.Minutes, timeSpan_elapsed.Seconds, timeSpan_elapsed.Milliseconds) + " (depends highly on CPU)";
+            this.Invoke((Action)this.UpdateLabels);
         }
 
-        public void CountTime()
+        public void UpdateLabels()
         {            
-            lblSortTime.Text = "Sorting Time: " + time;
+            //lblSortTime.Text = "Sorting Time: " + time;
+            lblAccesses.Text = "Array Accesses: " + array_accesses;
+            lblComparisons.Text = "Comparisons: " + array_comparisons;
         }
 
         public async Task wait()
@@ -77,7 +81,7 @@ namespace Sorting_Visualizer
         {
             FillArray();
             GetRectangleSize();
-        }        
+        }
 
         //Fills the array with the initial values
         public void FillArray()
@@ -128,6 +132,8 @@ namespace Sorting_Visualizer
                 RECT_WIDTH = (pictureBox1.Width - 10 - arraySize) / arraySize;
             else
                 RECT_WIDTH = (pictureBox1.Width - 10) / arraySize;
+
+            RECT_HEIGHT = (this.Height - 50) / arraySize;
         }
 
         private void btnRandomize_Click(object sender, EventArgs e)
@@ -150,6 +156,9 @@ namespace Sorting_Visualizer
 
         private void btnSort_Click(object sender, EventArgs e)
         {
+            array_accesses = 0;
+            array_comparisons = 0;
+
             switch (cbbAlgos.SelectedIndex)
             {
                 case 0: Algorithms.SelectionSort(this); break;
@@ -182,7 +191,6 @@ namespace Sorting_Visualizer
         {
             arraySize = (int)nupArraySize.Value + 1;
             GetRectangleSize();
-            RECT_HEIGHT = (this.Height - 50) / arraySize;
             FillArray();
             await wait();
         }
