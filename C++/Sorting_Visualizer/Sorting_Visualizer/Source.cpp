@@ -3,7 +3,7 @@
 #include <vector>
 #include <iostream>
 
-void DrawRectangles(int* arr, int width, int height, int offset);
+void DrawArray(sf::RenderWindow &win, int winW, int winH, std::vector<int> vect, int width, int height, int offset);
 
 int main() {
 
@@ -21,7 +21,7 @@ int main() {
 	//Visualizer Variables
 	int VIS_OFFSET = 5; //Pixels between borders and drawn array
 	//int VIS_SPACING; //Spacing between array numbers
-	int VIS_WIDTH = WIN_W / (WIN_W - VIS_OFFSET * 2 - ARRAY_SIZE);
+	int VIS_WIDTH = (WIN_W - (VIS_OFFSET * ARRAY_SIZE)) / ARRAY_SIZE;
 	int VIS_HEIGHT = (WIN_H - VIS_OFFSET * 2) / ARRAY_SIZE; //Multiplier
 
 	sf::RenderWindow window(sf::VideoMode(WIN_W, WIN_H), WIN_TITLE);
@@ -34,16 +34,19 @@ int main() {
 			if (event.type == sf::Event::Closed)
 				window.close();
 
-			if (event.type == sf::Event::KeyPressed)
+			if (event.type == sf::Event::KeyPressed) {
 				if (event.key.code == sf::Keyboard::Space)
 					ShuffleArray(ARRAY_NUMBERS);
+				if (event.key.code == sf::Keyboard::S)
+					SortArray(0, ARRAY_NUMBERS); //Change to Enum
+			}
 		}
 
 		//App Processes
 		window.clear(sf::Color::Black);
 
-		std::cout << ARRAY_NUMBERS[0] << std::endl;
-		//DrawRectangles(ARRAY_NUMBERS, VIS_WIDTH, VIS_HEIGHT, VIS_OFFSET);
+		//std::cout << ARRAY_NUMBERS[0] << std::endl;
+		DrawArray(window, WIN_W, WIN_H, ARRAY_NUMBERS, VIS_WIDTH, VIS_HEIGHT, VIS_OFFSET);
 
 		window.display();
 	}
@@ -51,6 +54,13 @@ int main() {
 	return 0;
 }
 
-void DrawRectangles(int* arr, int width, int height, int offset) {
-
+//Draws the complete array to the screen
+void DrawArray(sf::RenderWindow &win, int winW, int winH, std::vector<int> vect, int width, int height, int offset) {
+	for (int i = 0; i < vect.size(); i++) {
+		sf::RectangleShape rect(sf::Vector2f(width, vect[i] * height));
+		rect.setPosition(sf::Vector2f(i * width + (offset * i+1), winH - (vect[i] * height) - offset));
+		//rect.setScale(sf::Vector2f(width, height));
+		rect.setFillColor(sf::Color::White);
+		win.draw(rect);
+	}	
 }
