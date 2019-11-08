@@ -38,7 +38,7 @@ int main() {
 				if (event.key.code == sf::Keyboard::Space)
 					ShuffleArray(ARRAY_NUMBERS);
 				if (event.key.code == sf::Keyboard::S)
-					SortArray(0, ARRAY_NUMBERS); //Change to Enum
+					SortArray(Algorithm::Bubble_Sort, ARRAY_NUMBERS); //Change to Enum
 			}
 		}
 
