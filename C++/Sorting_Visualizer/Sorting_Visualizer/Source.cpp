@@ -1,30 +1,12 @@
 #include <SFML/Graphics.hpp>
+#include "Common.h"
 #include "Array.h"
 #include <vector>
 #include <iostream>
 
-void DrawArray(sf::RenderWindow &win, int winW, int winH, std::vector<int> vect, int width, int height, int offset);
-
 int main() {
 
-	//Window Variables
-	int WIN_W = 1200;
-	int WIN_H = 800;
-	const char* WIN_TITLE = "Teste";
-
-	//Array Variables
-	std::vector<int> ARRAY_NUMBERS;
-	int ARRAY_SIZE = 100; //Must always be less than half of the height?
-
 	CreateNewArray(ARRAY_NUMBERS, ARRAY_SIZE);
-
-	//Visualizer Variables
-	int VIS_OFFSET = 5; //Pixels between borders and drawn array
-	//int VIS_SPACING; //Spacing between array numbers
-	int VIS_WIDTH = (WIN_W - (VIS_OFFSET * ARRAY_SIZE)) / ARRAY_SIZE;
-	int VIS_HEIGHT = (WIN_H - VIS_OFFSET * 2) / ARRAY_SIZE; //Multiplier
-
-	sf::RenderWindow window(sf::VideoMode(WIN_W, WIN_H), WIN_TITLE);
 
 	//Main app loop
 	while (window.isOpen()) {
@@ -52,15 +34,4 @@ int main() {
 	}
 
 	return 0;
-}
-
-//Draws the complete array to the screen
-void DrawArray(sf::RenderWindow &win, int winW, int winH, std::vector<int> vect, int width, int height, int offset) {
-	for (int i = 0; i < vect.size(); i++) {
-		sf::RectangleShape rect(sf::Vector2f(width, vect[i] * height));
-		rect.setPosition(sf::Vector2f(i * width + (offset * i+1), winH - (vect[i] * height) - offset));
-		//rect.setScale(sf::Vector2f(width, height));
-		rect.setFillColor(sf::Color::White);
-		win.draw(rect);
-	}	
 }
